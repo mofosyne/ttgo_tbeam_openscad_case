@@ -422,33 +422,9 @@ module ttgoV2Cut(smdUseIPEX = false)
 }
 
 ///////////////////////////////////////////////////////
-// Output
-if (0)
-{
-    // Dev 
-    // topCaseEnable
-    if (0)
-    difference()
-    {
-        ttgoV2Top();
-        ttgoV2Cut();
-    }
-
-    // bottomCaseEnable
-    if (0)
-    difference()
-    {
-        ttgoV2Bottom();
-        ttgoV2Cut();
-    }
-
-    // Model
-    //%ttgoV2Model();
-    //%ttgoV2Model_PCBOnly();
-}
-
 
 module part_ttgo_20191212_t22_V1_1_case_ipex_top() { // `make` me
+    rotate([0,180,0])
     difference()
     {
         ttgoV2Top(smdUseIPEX = true);
@@ -463,6 +439,7 @@ module part_ttgo_20191212_t22_V1_1_case_ipex_bottom() { // `make` me
     }
 }
 module part_ttgo_20191212_t22_V1_1_case_sma_top() { // `make` me
+    rotate([0,180,0])
     difference()
     {
         ttgoV2Top(smdUseIPEX = false);
@@ -475,4 +452,24 @@ module part_ttgo_20191212_t22_V1_1_case_sma_bottom() { // `make` me
         ttgoV2Bottom(smdUseIPEX = false);
         ttgoV2Cut(smdUseIPEX = false);
     }
+}
+
+// Output
+if (0)
+{
+    // Dev 
+    smdUseIPEXDev = true;
+    difference()
+    {
+        union()
+        {
+            ttgoV2Top(smdUseIPEX = smdUseIPEXDev);
+            ttgoV2Bottom(smdUseIPEX = smdUseIPEXDev);
+        }
+        ttgoV2Cut(smdUseIPEX = smdUseIPEXDev);
+    }
+
+    // Model
+    //%ttgoV2Model();
+    //%ttgoV2Model_PCBOnly();
 }

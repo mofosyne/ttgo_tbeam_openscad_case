@@ -18,6 +18,6 @@ include $(wildcard *.deps)
 
 %.stl: %.scad
 	openscad -m make -o ./stl/$@ -d $@.deps $<
-
+ 
 clean:
 	rm part_*
