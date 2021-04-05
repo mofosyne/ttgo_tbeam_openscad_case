@@ -21,8 +21,11 @@ Also targeting:
 ## Supported HW Board revisions to folder revisions
 
 * `20191212 t22_V1.1` in lilygo_ttgo_tbeam_case_20191212_t22_V1_1
+    - STL File : `lilygo_ttgo_tbeam_case_20191212_t22_V1_1\stl`
+    - Download 
+        - [Rev1](https://github.com/mofosyne/ttgo_tbeam_openscad_case/releases/download/20191212_t22_V1_1_Rev1/lilygo_ttgo_tbeam_case_20191212_t22_V1_1_Rev1.zip)
 
-# Case examples
+# Renders
 
 ## 20191212 t22_V1.1
 
