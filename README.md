@@ -3,18 +3,20 @@
 Openscad case for LIlyGo TTGO T-Beam boards
 supporting both SMA and IPEX antenna versions.
 
-![](ttgo_20191212_t22_V1_1_IPEX.png)
-![](ttgo_20191212_t22_V1_1_SMA.png)
+![](ttgo_20191212_t22_V1_1_SMA_real.jpg)
 
 **Contributions welcomed, feel free to send a push request for considerations. Build process improvements... new hardware revision supports**
 
-This was created to bring together various good ideas I seen in various cases, but targeting:
+This was created to bring together various good ideas I seen in various cases but aiming for ease of printing
 
-* Hight tolerances for 3D printing
-* Bag mountable
+Also targeting:
+
+* Hight tolerances for loose 3D printers
+* Slits for mounting straps
 * Support both IPEX and SMA antenna style
 * Support OLED
 * Support both zip tie or M3 or M2 screws to hold case together
+* Able to prop device at an angle to view screen on desk easily
 
 ## Supported HW Board revisions to folder revisions
 
@@ -35,6 +37,7 @@ This was created to bring together various good ideas I seen in various cases, b
 * Add a grill on top of OLED screen to prevent screen damage
 * Add buttons as an option to help reduce enviromental ingress damage.
 * Make a version that is enviromentally sealed (no buttons perhaps) with rubber seals (But how to charge?)
+* Allow for various GPS antenna style and mounts
 
 # Building
 
