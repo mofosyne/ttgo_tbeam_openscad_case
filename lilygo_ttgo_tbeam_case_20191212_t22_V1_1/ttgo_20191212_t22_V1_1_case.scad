@@ -188,19 +188,22 @@ module ttgoV2TopFlap()
     oledtol=10;
     oledGrillFlap = 0.3;
 
-    // Hinge
-    translate([ttgoxExact/2-6-7.5-15/2,ttgoyExact/2-25,ttgoPCB/2+ttgoSMD+3.2+oledGrillFlap/2])
-        cube([2,25-8,oledGrillFlap],center=true);
+    translate([0,0,-0.4])
+    {
+        // Hinge
+        translate([ttgoxExact/2-6-7.5-15/2,ttgoyExact/2-25,ttgoPCB/2+ttgoSMD+3.2+oledGrillFlap/2])
+            cube([2,25-8,oledGrillFlap],center=true);
 
-    // Flap
-    translate([ttgoxExact/2-6-7.5,ttgoyExact/2-25,ttgoPCB/2+ttgoSMD+3.2+oledGrillFlap/2])
-        difference()
-        {
-            cube([15-2,25-2,oledGrillFlap],center=true);
-            translate([(15-2)/2-3/2,0,0])
-                cube([3,25-2,oledGrillFlap+1],center=true);
-        }
-
+        // Flap
+        translate([ttgoxExact/2-6-7.5,ttgoyExact/2-25,ttgoPCB/2+ttgoSMD+3.2+oledGrillFlap/2])
+            difference()
+            {
+                cube([15-2,25-2,oledGrillFlap],center=true);
+                translate([(15-2)/2-3/2,0,0])
+                    cube([3,25-2,oledGrillFlap+1],center=true);
+            }
+    }
+    
     // Screen Model (Or you can use this to create a no screen version)
     if (0)
     %translate([ttgoxExact/2-6-7.5,ttgoyExact/2-25,ttgoPCB/2+ttgoSMD+3.25])
