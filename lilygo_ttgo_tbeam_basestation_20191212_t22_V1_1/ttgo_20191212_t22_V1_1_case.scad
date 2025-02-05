@@ -106,7 +106,7 @@ module ttgoV2Bottom(smdUseIPEX = false)
         {
             translate([0,-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,+ttgoPCB/2+ttgoSMD])
                 cube([(holeSMA_dia+holeSpacing*2+caseThickness*2),(ttgoyExact/2+SMAExtra+SMAMountThickness),0.01], center=true);
-            translate([0,-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2])
+            translate([0,-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)])
                 rotate([90,0,0])
                     cylinder(r=(holeSMA_dia/2 + holeSpacing + caseThickness/2), h=(ttgoyExact/2+SMAExtra+SMAMountThickness), $fn=20, center=true);
             translate([0,-(78/2)/2,-ttgoPCB/2-20-caseThickness])
@@ -345,14 +345,20 @@ module ttgoV2Cut(smdUseIPEX = false)
     if (smdUseIPEX)
     {
         SMAExtra=10;
-        translate([0,-ttgoyExact/2-SMAExtra,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2])
+        translate([0,-ttgoyExact/2-SMAExtra,-ttgoPCB/2-(holeSMA_dia+holeSpacing)-holeSpacing/2])
             rotate([90,0,0])
             cylinder(r=holeSMA_dia/2, h=10+SMAExtra, $fn=20, center=true);
+
+        // Extra Hole For GPS antenna
+        translate([0,-ttgoyExact/2-SMAExtra,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing/2])
+            rotate([90,0,0])
+            cylinder(r=holeSMA_dia/2, h=10+SMAExtra, $fn=20, center=true);
+
         hull()
         {
             translate([0,-(ttgoyExact/2+SMAExtra)/2,+ttgoPCB/2+ttgoSMD+0.01])
                 cube([(holeSMA_dia+holeSpacing*2),(ttgoyExact/2+SMAExtra),0.01], center=true);
-            translate([0,-(ttgoyExact/2+SMAExtra)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2])
+            translate([0,-(ttgoyExact/2+SMAExtra)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)])
                 rotate([90,0,0])
                 cylinder(r=(holeSMA_dia/2 + holeSpacing), h=(ttgoyExact/2+SMAExtra), $fn=20, center=true);
             translate([0,-(78/2)/2,-ttgoPCB/2-20])
@@ -408,37 +414,24 @@ module ttgoV2Cut(smdUseIPEX = false)
             cylinder(r=2/2-0.05, h=100, center=true, $fn=20);
     }
 
-    // Strap Slot
-    translate([0,ttgoy/2-30,0])
-    {
-        // Typical Straps is around 2mm by 25mm
-        translate([-ttgox/2-caseZipTieExtra/2+1.5,0,0])
-            cube([2.5,20,100], center=true);
-        translate([-(-ttgox/2-caseZipTieExtra/2+1.5),0,0])
-            cube([2.5,20,100], center=true);
-    }
-    
-    // Strap Slot
-    translate([0,ttgoy/2-65,0])
-    {
-        // Typical Straps is around 2mm by 25mm
-        translate([-ttgox/2-caseZipTieExtra/2+1.5,0,0])
-            cube([2.5,35,100], center=true);
-        translate([-(-ttgox/2-caseZipTieExtra/2+1.5),0,0])
-            cube([2.5,35,100], center=true);
-    }
-
-    // Lanyard
-    translate([0,+ttgoy/2-3,-ttgoPCB/2-4])
-        rotate([0,90,0])
-            cylinder(r=2,h=100,$fn=40, center=true);
-
     if (!smdUseIPEX)
     {
         translate([0,-(ttgoy/2-3),-ttgoPCB/2-4])
             rotate([0,90,0])
                 cylinder(r=2,h=100,$fn=40, center=true);
     }
+
+    // M3 Base Mounting screw
+    translate([0,-10,0]) rotate([180,0,0]) cylinder(r=3/2-0.05, h=100, $fn=20);
+    translate([0,+10,0]) rotate([180,0,0]) cylinder(r=3/2-0.05, h=100, $fn=20);
+
+    // M4 Base Mounting screw
+    translate([0,-20,0]) rotate([180,0,0]) cylinder(r=4/2-0.05, h=100, $fn=20);
+    translate([0,+20,0]) rotate([180,0,0]) cylinder(r=4/2-0.05, h=100, $fn=20);
+
+    // M6 Base Mounting screw
+    translate([0,-30,0]) rotate([180,0,0]) cylinder(r=6/2-0.05, h=100, $fn=20);
+    translate([0,+30,0]) rotate([180,0,0]) cylinder(r=6/2-0.05, h=100, $fn=20);
 }
 
 ///////////////////////////////////////////////////////
@@ -485,15 +478,15 @@ module part_ttgo_20191212_t22_V1_1_case_sma_bottom() { // `make` me
 
 
 /* Dev Preview */ 
-smdUseIPEXDev = false;
+smdUseIPEXDev = true;
 union()
 {
     difference()
     {
         union()
         {
-            ttgoV2Top(smdUseIPEX = smdUseIPEXDev);
-            //ttgoV2Bottom(smdUseIPEX = smdUseIPEXDev);
+            //ttgoV2Top(smdUseIPEX = smdUseIPEXDev);
+            ttgoV2Bottom(smdUseIPEX = smdUseIPEXDev);
         }
         ttgoV2Cut(smdUseIPEX = smdUseIPEXDev);
     }
