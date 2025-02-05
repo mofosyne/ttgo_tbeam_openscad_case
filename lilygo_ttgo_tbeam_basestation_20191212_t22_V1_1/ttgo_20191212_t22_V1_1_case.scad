@@ -358,7 +358,7 @@ module ttgoV2Cut(smdUseIPEX = false)
         {
             translate([0,-(ttgoyExact/2+SMAExtra)/2,+ttgoPCB/2+ttgoSMD+0.01])
                 cube([(holeSMA_dia+holeSpacing*2),(ttgoyExact/2+SMAExtra),0.01], center=true);
-            translate([0,-(ttgoyExact/2+SMAExtra)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)])
+            translate([0,-(ttgoyExact/2+SMAExtra)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)+1])
                 rotate([90,0,0])
                 cylinder(r=(holeSMA_dia/2 + holeSpacing), h=(ttgoyExact/2+SMAExtra), $fn=20, center=true);
             translate([0,-(78/2)/2,-ttgoPCB/2-20])
@@ -421,17 +421,33 @@ module ttgoV2Cut(smdUseIPEX = false)
                 cylinder(r=2,h=100,$fn=40, center=true);
     }
 
-    // M3 Base Mounting screw
-    translate([0,-10,0]) rotate([180,0,0]) cylinder(r=3/2-0.05, h=100, $fn=20);
-    translate([0,+10,0]) rotate([180,0,0]) cylinder(r=3/2-0.05, h=100, $fn=20);
 
+    /* Screw Holes */
     // M4 Base Mounting screw
-    translate([0,-20,0]) rotate([180,0,0]) cylinder(r=4/2-0.05, h=100, $fn=20);
-    translate([0,+20,0]) rotate([180,0,0]) cylinder(r=4/2-0.05, h=100, $fn=20);
+    translate([0,-10,-ttgoPCB/2-20-caseThickness-1]) cylinder(r=4/2-0.05, h=10, $fn=20);
+    translate([0,+10,-ttgoPCB/2-20-caseThickness-1]) cylinder(r=4/2-0.05, h=10, $fn=20);
 
     // M6 Base Mounting screw
-    translate([0,-30,0]) rotate([180,0,0]) cylinder(r=6/2-0.05, h=100, $fn=20);
-    translate([0,+30,0]) rotate([180,0,0]) cylinder(r=6/2-0.05, h=100, $fn=20);
+    translate([0,-20,-ttgoPCB/2-20-caseThickness-1]) cylinder(r=6/2-0.05, h=10, $fn=20);
+    translate([0,+20,-ttgoPCB/2-20-caseThickness-1]) cylinder(r=6/2-0.05, h=10, $fn=20);
+
+    // M8 Base Mounting screw
+    translate([0,-30,-ttgoPCB/2-20-caseThickness-1]) cylinder(r=8/2-0.05, h=10, $fn=20);
+    translate([0,+30,-ttgoPCB/2-20-caseThickness-1]) cylinder(r=8/2-0.05, h=10, $fn=20);
+
+    /* Chamfer */
+    // M4 Base Mounting screw
+    translate([0,-10,-ttgoPCB/2-20-caseThickness+2]) cylinder(r1=4/2-0.05, r2=(4+10)/2-0.05, h=2, $fn=20);
+    translate([0,+10,-ttgoPCB/2-20-caseThickness+2]) cylinder(r1=4/2-0.05, r2=(4+10)/2-0.05, h=2, $fn=20);
+
+    // M6 Base Mounting screw
+    translate([0,-20,-ttgoPCB/2-20-caseThickness+2]) cylinder(r1=6/2-0.05, r2=(6+10)/2-0.05, h=2, $fn=20);
+    translate([0,+20,-ttgoPCB/2-20-caseThickness+2]) cylinder(r1=6/2-0.05, r2=(6+10)/2-0.05, h=2, $fn=20);
+
+    // M8 Base Mounting screw
+    translate([0,-30,-ttgoPCB/2-20-caseThickness+2]) cylinder(r1=8/2-0.05, r2=(8+10)/2-0.05, h=2, $fn=20);
+    translate([0,+30,-ttgoPCB/2-20-caseThickness+2]) cylinder(r1=8/2-0.05, r2=(8+10)/2-0.05, h=2, $fn=20);
+
 }
 
 ///////////////////////////////////////////////////////
