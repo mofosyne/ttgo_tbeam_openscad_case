@@ -95,7 +95,6 @@ module ttgoV2Bottom(smdUseIPEX = false)
         }
     }
     
-
     // SMD Hole
     if (smdUseIPEX)
     {
@@ -104,11 +103,15 @@ module ttgoV2Bottom(smdUseIPEX = false)
         SMAMountThickness=1;
         hull()
         {
+            top_size = (holeSMA_dia*2+holeSpacing*2+caseThickness*2);
             translate([0,-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,+ttgoPCB/2+ttgoSMD])
-                cube([(holeSMA_dia+holeSpacing*2+caseThickness*2),(ttgoyExact/2+SMAExtra+SMAMountThickness),0.01], center=true);
-            translate([0,-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)])
+                cube([top_size,(ttgoyExact/2+SMAExtra+SMAMountThickness),0.01], center=true);
+            translate([top_size/2-(holeSMA_dia/2 + holeSpacing),-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing/2])
                 rotate([90,0,0])
-                    cylinder(r=(holeSMA_dia/2 + holeSpacing + caseThickness/2), h=(ttgoyExact/2+SMAExtra+SMAMountThickness), $fn=20, center=true);
+                    cylinder(r=(holeSMA_dia/4 + holeSpacing + caseThickness/2), h=(ttgoyExact/2+SMAExtra+SMAMountThickness), $fn=20, center=true);
+            translate([-(top_size/2-(holeSMA_dia/2 + holeSpacing)),-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing/2])
+                rotate([90,0,0])
+                    cylinder(r=(holeSMA_dia/4 + holeSpacing + caseThickness/2), h=(ttgoyExact/2+SMAExtra+SMAMountThickness), $fn=20, center=true);
             translate([0,-(78/2)/2,-ttgoPCB/2-20-caseThickness])
                 cube([(holeSMA_dia+holeSpacing*2),(78/2),0.01], center=true);
         }
@@ -155,8 +158,9 @@ module ttgoV2Top(smdUseIPEX = false)
             {
                 SMAExtra=10;
                 SMAMountThickness=1;
+                top_size = (holeSMA_dia*2+holeSpacing*2+caseThickness*2);
                 translate([0,-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,ttgoSMD/2])
-                    cube([(holeSMA_dia+holeSpacing*2+caseThickness*2),(ttgoyExact/2+SMAExtra+SMAMountThickness),ttgoSMD], center=true);
+                    cube([top_size,(ttgoyExact/2+SMAExtra+SMAMountThickness),ttgoSMD], center=true);
             }
         }
 }
@@ -345,22 +349,26 @@ module ttgoV2Cut(smdUseIPEX = false)
     if (smdUseIPEX)
     {
         SMAExtra=10;
-        translate([0,-ttgoyExact/2-SMAExtra,-ttgoPCB/2-(holeSMA_dia+holeSpacing)-holeSpacing/2])
+        translate([+(holeSMA_dia+holeSpacing)/2,-ttgoyExact/2-SMAExtra,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing])
             rotate([90,0,0])
             cylinder(r=holeSMA_dia/2, h=10+SMAExtra, $fn=20, center=true);
 
         // Extra Hole For GPS antenna
-        translate([0,-ttgoyExact/2-SMAExtra,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing/2])
+        translate([-(holeSMA_dia+holeSpacing)/2,-ttgoyExact/2-SMAExtra,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing])
             rotate([90,0,0])
             cylinder(r=holeSMA_dia/2, h=10+SMAExtra, $fn=20, center=true);
 
         hull()
         {
+            top_size = (holeSMA_dia*2+holeSpacing*2);
             translate([0,-(ttgoyExact/2+SMAExtra)/2,+ttgoPCB/2+ttgoSMD+0.01])
-                cube([(holeSMA_dia+holeSpacing*2),(ttgoyExact/2+SMAExtra),0.01], center=true);
-            translate([0,-(ttgoyExact/2+SMAExtra)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)+1])
+                cube([top_size,(ttgoyExact/2+SMAExtra),0.01], center=true);
+            translate([top_size/2-(holeSMA_dia/2),-(ttgoyExact/2+SMAExtra)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing/2])
                 rotate([90,0,0])
-                cylinder(r=(holeSMA_dia/2 + holeSpacing), h=(ttgoyExact/2+SMAExtra), $fn=20, center=true);
+                cylinder(r=(holeSMA_dia/4 + holeSpacing/2), h=(ttgoyExact/2+SMAExtra), $fn=20, center=true);
+            translate([-(top_size/2-(holeSMA_dia/2)),-(ttgoyExact/2+SMAExtra)/2,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing/2])
+                rotate([90,0,0])
+                cylinder(r=(holeSMA_dia/4 + holeSpacing/2), h=(ttgoyExact/2+SMAExtra), $fn=20, center=true);
             translate([0,-(78/2)/2,-ttgoPCB/2-20])
                 cube([(holeSMA_dia+holeSpacing*2),(78/2),0.01], center=true);
         }
@@ -501,7 +509,7 @@ union()
     {
         union()
         {
-            //ttgoV2Top(smdUseIPEX = smdUseIPEXDev);
+            ttgoV2Top(smdUseIPEX = smdUseIPEXDev);
             ttgoV2Bottom(smdUseIPEX = smdUseIPEXDev);
         }
         ttgoV2Cut(smdUseIPEX = smdUseIPEXDev);
@@ -510,4 +518,4 @@ union()
 
 /* Model */
 //%ttgoV2Model();
-%ttgoV2Model_PCBOnly();
+//%ttgoV2Model_PCBOnly();
