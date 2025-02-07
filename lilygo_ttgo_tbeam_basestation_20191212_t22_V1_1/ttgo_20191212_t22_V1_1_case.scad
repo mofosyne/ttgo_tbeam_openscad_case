@@ -99,7 +99,7 @@ module ttgoV2Bottom(smdUseIPEX = false)
     if (smdUseIPEX)
     {
         // IPEX SMA Antenna Hole
-        SMAExtra=10;
+        SMAExtra=3;
         SMAMountThickness=1;
         hull()
         {
@@ -156,7 +156,7 @@ module ttgoV2Top(smdUseIPEX = false)
             // SMD Hole
             if (smdUseIPEX)
             {
-                SMAExtra=10;
+                SMAExtra=3;
                 SMAMountThickness=1;
                 top_size = (holeSMA_dia*2+holeSpacing*2+caseThickness*2);
                 translate([0,-(ttgoyExact/2+SMAExtra+SMAMountThickness)/2,ttgoSMD/2])
@@ -348,7 +348,7 @@ module ttgoV2Cut(smdUseIPEX = false)
     // SMD Hole
     if (smdUseIPEX)
     {
-        SMAExtra=10;
+        SMAExtra=3;
         translate([+(holeSMA_dia+holeSpacing)/2,-ttgoyExact/2-SMAExtra,-ttgoPCB/2-(holeSMA_dia+holeSpacing)/2+holeSpacing])
             rotate([90,0,0])
             cylinder(r=holeSMA_dia/2, h=10+SMAExtra, $fn=20, center=true);

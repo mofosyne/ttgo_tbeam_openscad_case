@@ -5,6 +5,8 @@ supporting both SMA and IPEX antenna versions.
 
 ![](ttgo_20191212_t22_V1_1_SMA_real.jpg)
 
+![](ttgo_20191212_t22_V1_1_IPEX_real_basestation_assembled.jpg)
+
 **Contributions welcomed, feel free to send a push request for considerations. Build process improvements... new hardware revision supports**
 
 This was created to bring together various good ideas I seen in various cases but aiming for ease of printing
@@ -44,8 +46,26 @@ Also targeting:
 
 # Building
 
-Requires linux or windows running linux subsystem.
+Requires linux or windows running linux subsystem to build the scad files.
+
+
+# Assembling the base station
+
+You should use the IPEX version of the t-beam.
+
+Used two IPEX to SMA-KY 5CM adapter. One for the lora antenna. One for GPS.
+
+Intent is to be used as a base station on a garage or a car booth.
+
+Below is a visual representation of how it can be assembled.
+
+![](ttgo_20191212_t22_V1_1_IPEX_real_basestation_bottom_assembly.jpg)
+
+![](ttgo_20191212_t22_V1_1_IPEX_real_basestation_pcb_attached.jpg)
+
+![](ttgo_20191212_t22_V1_1_IPEX_real_basestation_assembled.jpg)
 
 # Related links
 
 * https://meshtastic.discourse.group/t/what-3d-printed-case-to-use-with-ttgo-t-beam-t22-v1-1/564/3 What 3D-printed case to use with TTGO T-beam (T22-V1.1)
+
